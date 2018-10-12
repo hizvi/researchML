@@ -85,7 +85,7 @@ def vectorize_data():
     from sklearn.feature_extraction.text import CountVectorizer
     
     token = r"(?u)\b[\w\'/]+\b"
-    vectorizer = CountVectorizer(token_pattern=token)
+    vectorizer = CountVectorizer(token_pattern=token, min_df=5)
     
     print("Vectorizing data")
     X_train_vector = vectorizer.fit_transform(X_train_corpus)
