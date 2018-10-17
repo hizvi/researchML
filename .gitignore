@@ -1,0 +1,8 @@
+# ignore ipynb checkpoints and __pycaches__
+.*
+_*
+**/.*
+**/_*
+test/
+
+!.gitignore
