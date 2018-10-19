@@ -72,7 +72,7 @@ class Sampler(object):
             
             # update labels and labeled data 
             self.labels.append(self._is_neutral[label])
-            self.labeled.append(edu + ' ' + label)
+            self.labeled.append(edu[:-1] + ' ' + label + '\n')
             
             print('======> LABELED', label.upper(), '\n')
             
