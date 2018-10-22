@@ -15,6 +15,8 @@ class Sampler(object):
         list of labeled EDUs
     labels: list of int
         list of labels
+    nzp: tuple of int
+        tuple containing counts of each label
     
     Methods
     -------
@@ -35,8 +37,8 @@ class Sampler(object):
                   } 
     
     def __init__(self):
-        self.unlabeled = self.__read_unlabeled(r"UnlabeledEDUs.txt")
-        self.labeled, self.labels = self.__read_labeled(r"labeledEDUs.txt")
+        self.unlabeled = self.__read_unlabeled(r"../UnlabeledEDUS2.txt")
+        self.labeled, self.labels, self.nzp = self.__read_labeled(r"../labeledEDUS.txt")
         
     def sample(self, k): 
         raise AttributeError('base Sample class does not implement method sample()') 
@@ -45,10 +47,10 @@ class Sampler(object):
         """
         writes the attributes to their respective files
         """
-        with open(r"UnlabeledEDUS.txt", "w", newline='') as f: 
+        with open(r"../UnlabeledEDUS2.txt", "w", newline='') as f: 
             for line in self.unlabeled: 
                 f.write(line)  
-        with open(r"LabeledEDUS.txt", "w", newline='') as f: 
+        with open(r"../LabeledEDUS.txt", "w", newline='') as f: 
             for line in self.labeled: 
                 f.write(line) 
                 
@@ -140,18 +142,24 @@ class Sampler(object):
             list of labeled EDUs 
         labels: list of int
             list of labels
-            
+        nzp: tuple of int
+            count of each label
         """
         labeled = []
         labels = []
         
+        # to analyze the distribution of categories
+        lindex = ['n', 'z', 'p']
+        nzp = [0, 0, 0]
+        
         with open(filename) as infile: 
             for line in infile: 
                 #print(line)
+                nzp[lindex.index(line[-2])] += 1 
                 labels.append(self._is_neutral[line[-2]]) 
                 labeled.append(line)
         
-        return labeled, labels
+        return labeled, labels, tuple(nzp)
         
         
         
