@@ -6,6 +6,12 @@ This repo contains stuff related to my work/study as an undergraduate research a
 ## Contents
 
 + `/edu`
+    - `models/`
+        * `mnbayes.ipynb` : Multinomial Naive Bayes classification
+        * `logreg.ipynb` : Logistic Regression classification
+        * `svm.ipynb` : SVM classification
+        * `keras.ipynb` : keras deep learning on EDUs
+        * `process_edus.py` : handle data loading and prep
     - `active_learning/` 
         * `run_labelling.ipynb` : labeling bed
         * `label.py` : handles labeling
