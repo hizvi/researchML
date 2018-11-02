@@ -30,7 +30,7 @@ class EDUSample:
                     continue
                 
                 targets.append(label[line[-2]]) 
-                edus.append(line)
+                edus.append(line[:-2])
          
         print('=====> DATA LOADED')
         
@@ -52,6 +52,14 @@ class EDUSample:
         '''
         split data and return vectorized.
         '''
+        X_train_corpus, X_test_corpus, y_train, y_test = self.split(path)
+        return self.vectorize(X_train_corpus, X_test_corpus, y_train, y_test, ngram)
+        
+    
+    def split(self, path):
+        '''
+        split data and return vectorized.
+        '''
         # read form file
         edus, targets = self.read_labeled(path) 
         
@@ -61,6 +69,19 @@ class EDUSample:
                                                                           test_size=1./3, 
                                                                           random_state=42)
         
+        print("""                    X_train_corpus shape: {}
+                    y_train shape: {}
+                    X_test_corpus shape: {}
+                    y_test shape: {}        
+        """.format(X_train_corpus.shape, y_train.shape, X_test_corpus.shape, y_test.shape))
+        
+        return X_train_corpus, y_train, X_test_corpus, y_test
+    
+    
+    def vectorize(self, X_train_corpus, y_train, X_test_corpus, y_test, ngram=(1, 1)):
+        """
+        vectorize using CountVectorizer
+        """
         # vectorize it
         token = r"(?u)\b[\w\'/]+\b"
         sw = stopwords.words('english').append('br')
@@ -76,12 +97,10 @@ class EDUSample:
         print('=====> DATA VECTORIZED')
         print('\t ngram range ', ngram)
         
-        print("""
-                    X_train_vector shape: {}
+        print("""                    X_train_vector shape: {}
                     y_train shape: {}
                     X_test_vector shape: {}
                     y_test shape: {}        
         """.format(X_train_vector.shape, y_train.shape, X_test_vector.shape, y_test.shape))
         
         return X_train_vector, y_train, X_test_vector, y_test
-    
