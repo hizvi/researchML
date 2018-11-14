@@ -58,7 +58,7 @@ class EDUSample:
     
     def split(self, path):
         '''
-        split data and return vectorized.
+        read and split data given file path
         '''
         # read form file
         edus, targets = self.read_labeled(path) 
@@ -69,13 +69,19 @@ class EDUSample:
                                                                           test_size=1./3, 
                                                                           random_state=42)
         
-        print("""                    X_train_corpus shape: {}
-                    y_train shape: {}
-                    X_test_corpus shape: {}
-                    y_test shape: {}        
-        """.format(X_train_corpus.shape, y_train.shape, X_test_corpus.shape, y_test.shape))
-        
         return X_train_corpus, y_train, X_test_corpus, y_test
+    
+    def split_data(self, edus, targets):
+        '''
+        split data given edus and targets
+        '''
+        # split data
+        X_train, X_test, y_train, y_test = train_test_split(edus, 
+                                                            targets, 
+                                                            test_size=1./3, 
+                                                            random_state=42)
+        
+        return X_train, y_train, X_test, y_test
     
     
     def vectorize(self, X_train_corpus, y_train, X_test_corpus, y_test, ngram=(1, 1)):
