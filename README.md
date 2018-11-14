@@ -7,6 +7,8 @@ This repo contains stuff related to my work/study as an undergraduate research a
 
 + `/edu`
     - `models/`
+        * `Dense.ipynb` : Fully connected Dense layers KERAS
+        * `CNN.ipynb` : Convolution on text KERAS.
         * `mnbayes.ipynb` : Multinomial Naive Bayes classification
         * `logreg.ipynb` : Logistic Regression classification
         * `svm.ipynb` : SVM classification
