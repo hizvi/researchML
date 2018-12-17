@@ -14,7 +14,12 @@ class EDUSample:
         read Labeled EDUs file and prepare data for testing models
         """
         edus, targets = [], []
+
         label = {'p': 1, 'n': 0, 'z': None}
+        
+        if z == 1:
+            label['n'] = -1
+            label['z'] = 0
         
         # to analyze the distribution of categories
         lindex = ['n', 'z', 'p']
